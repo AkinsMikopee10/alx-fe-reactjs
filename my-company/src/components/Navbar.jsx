@@ -7,7 +7,7 @@ const Navbar = () => {
       justifyContent: "space-between",
       alignItems: "center",
       padding: "10px 20px",
-      background: "purple",
+      backgroundColor: "purple",
       color: "#fff",
     },
     logo: {
