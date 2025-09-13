@@ -7,13 +7,8 @@ const AddRecipeForm = () => {
   const [description, setDescription] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (!title.trim() || !description.trim()) {
-      alert("Please enter both title and description.");
-      return;
-    }
-
+    event.preventDefault(); // prevent reload
+    if (!title.trim()) return; // simple validation
     addRecipe({ id: Date.now(), title, description });
     setTitle("");
     setDescription("");
@@ -23,26 +18,16 @@ const AddRecipeForm = () => {
     <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
       <input
         type="text"
+        placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-        style={{
-          display: "block",
-          marginBottom: "10px",
-          width: "100%",
-          padding: "8px",
-        }}
+        style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
       />
       <textarea
+        placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-        style={{
-          display: "block",
-          marginBottom: "10px",
-          width: "100%",
-          padding: "8px",
-        }}
+        style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
       />
       <button type="submit" style={{ padding: "8px 16px" }}>
         Add Recipe
