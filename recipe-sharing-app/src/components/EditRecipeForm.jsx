@@ -6,8 +6,9 @@ const EditRecipeForm = ({ recipe, onClose }) => {
   const [title, setTitle] = useState(recipe.title);
   const [description, setDescription] = useState(recipe.description);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    // <-- use "event" explicitly
+    event.preventDefault(); // <-- prevent default form submission
     if (!title.trim() || !description.trim()) {
       alert("Both title and description are required.");
       return;
