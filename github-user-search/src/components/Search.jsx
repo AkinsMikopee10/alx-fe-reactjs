@@ -28,7 +28,7 @@ function Search() {
       setResults(data.items);
       setHasMore(data.items.length > 0 && data.total_count > data.items.length);
     } catch {
-      setError("Looks like we can't find the user(s).");
+      setError("Looks like we cant find the user(s).");
     } finally {
       setLoading(false);
     }
