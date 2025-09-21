@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import SearchBar from "./components/searchBar";
+import Search from "./components/Search";
 
 function Home() {
   return (
     <div style={{ padding: "20px" }}>
       <h1>GitHub User Search</h1>
-      <SearchBar />
+      <Search />
     </div>
   );
 }
