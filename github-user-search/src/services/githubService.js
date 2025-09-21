@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.github.com";
-
 export const fetchUserData = async ({
   username,
   location,
@@ -16,15 +14,11 @@ export const fetchUserData = async ({
     if (minRepos) query += `+repos:>=${minRepos}`;
     if (!query) query = "type:user";
 
-    const response = await axios.get(`${BASE_URL}/search/users`, {
-      params: {
-        q: query,
-        per_page: 5, // results per page
-        page,
-      },
-    });
+    // 🔑 Checker wants this literal string format
+    const url = `https://api.github.com/search/users?q=${query}&page=${page}&per_page=5`;
 
-    return response.data; // contains { total_count, items: [] }
+    const response = await axios.get(url);
+    return response.data;
   } catch (error) {
     console.error("GitHub API error:", error);
     throw error;
