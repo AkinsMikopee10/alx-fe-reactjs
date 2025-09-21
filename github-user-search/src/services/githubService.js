@@ -1,12 +1,32 @@
 import axios from "axios";
 
-// Create an Axios instance with base URL
-const api = axios.create({
-  baseURL: "https://api.github.com/",
-});
+const BASE_URL = "https://api.github.com";
 
-// Function to fetch a GitHub user by username
-export const fetchUserData = async (username) => {
-  const response = await api.get(`/users/${username}`);
-  return response.data;
+export const fetchUserData = async ({
+  username,
+  location,
+  minRepos,
+  page = 1,
+}) => {
+  try {
+    let query = "";
+
+    if (username) query += `${username}`;
+    if (location) query += `+location:${location}`;
+    if (minRepos) query += `+repos:>=${minRepos}`;
+    if (!query) query = "type:user";
+
+    const response = await axios.get(`${BASE_URL}/search/users`, {
+      params: {
+        q: query,
+        per_page: 5, // results per page
+        page,
+      },
+    });
+
+    return response.data; // contains { total_count, items: [] }
+  } catch (error) {
+    console.error("GitHub API error:", error);
+    throw error;
+  }
 };
