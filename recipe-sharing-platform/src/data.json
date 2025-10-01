@@ -11,7 +11,7 @@
       "50g grated parmesan cheese",
       "Salt and black pepper"
     ],
-    "steps": [
+    "instructions": [
       "Cook spaghetti according to package instructions.",
       "Fry pancetta until crispy.",
       "Beat eggs and mix with cheese.",
@@ -32,7 +32,7 @@
       "400g canned tomatoes",
       "200ml cream"
     ],
-    "steps": [
+    "instructions": [
       "Marinate chicken in yogurt and tikka masala paste.",
       "Grill or pan-fry chicken until cooked.",
       "Fry onions until golden, then add tomatoes.",

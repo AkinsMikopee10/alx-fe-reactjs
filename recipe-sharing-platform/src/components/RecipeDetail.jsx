@@ -43,12 +43,14 @@ function RecipeDetail() {
           </ul>
         </div>
 
-        {/* Cooking Steps Section */}
+        {/* Instructions Section */}
         <div>
-          <h2 className="text-xl font-semibold mb-2">Cooking Steps</h2>
+          <h2 className="text-xl font-semibold mb-2">Instructions</h2>
           <ol className="list-decimal list-inside text-gray-700 space-y-2">
-            {recipe.steps &&
-              recipe.steps.map((step, index) => <li key={index}>{step}</li>)}
+            {recipe.instructions &&
+              recipe.instructions.map((step, index) => (
+                <li key={index}>{step}</li>
+              ))}
           </ol>
         </div>
       </div>
