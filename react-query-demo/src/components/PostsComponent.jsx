@@ -11,24 +11,19 @@ const fetchPosts = async () => {
 };
 
 function PostsComponent() {
-  // useQuery returns helpful values including refetch
+  // useQuery now includes extra options for caching and refreshing
   const { data, isLoading, isError, error, refetch, isFetching } = useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    staleTime: 1000 * 60, // cache stays "fresh" for 1 minute
+    staleTime: 1000 * 60, // data stays fresh for 1 minute
+    cacheTime: 1000 * 60 * 5, // keep cached data for 5 minutes even if unused
+    refetchOnWindowFocus: true, // refetch automatically when window regains focus
+    keepPreviousData: true, // keep old data while new data is being fetched
   });
 
-  // Loading state
-  if (isLoading) {
-    return <p>Loading posts...</p>;
-  }
+  if (isLoading) return <p>Loading posts...</p>;
+  if (isError) return <p style={{ color: "red" }}>Error: {error.message}</p>;
 
-  // Error state
-  if (isError) {
-    return <p style={{ color: "red" }}>Error: {error.message}</p>;
-  }
-
-  // Success state — render posts
   return (
     <div style={{ maxWidth: "600px", margin: "20px auto" }}>
       <h2>Posts from JSONPlaceholder</h2>
