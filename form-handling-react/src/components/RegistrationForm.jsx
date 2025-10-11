@@ -1,23 +1,41 @@
 import React, { useState } from "react";
 
 function RegistrationForm() {
-  // Step 1: create state variables for each input field
+  // form field states
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  // Step 2: handle form submission
+  // store validation errors as an object
+  const [errors, setErrors] = useState({});
+
+  // handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Step 3: basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required.");
+    // create a new object to store errors
+    const newErrors = {};
+
+    // individual field checks
+    if (!username) {
+      newErrors.username = "Username is required";
+    }
+    if (!email) {
+      newErrors.email = "Email is required";
+    }
+    if (!password) {
+      newErrors.password = "Password is required";
+    }
+
+    // update error state
+    setErrors(newErrors);
+
+    // stop if there are any errors
+    if (Object.keys(newErrors).length > 0) {
       return;
     }
 
-    // If validation passes, show success in console for now
+    // log form data if valid
     console.log("Form submitted successfully!");
     console.log({ username, email, password });
 
@@ -25,15 +43,12 @@ function RegistrationForm() {
     setUsername("");
     setEmail("");
     setPassword("");
-    setError("");
+    setErrors({});
   };
 
   return (
     <div style={{ maxWidth: "400px", margin: "20px auto" }}>
       <h2>User Registration</h2>
-
-      {/* show validation error */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: "10px" }}>
@@ -44,6 +59,7 @@ function RegistrationForm() {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username"
           />
+          {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
         </div>
 
         <div style={{ marginBottom: "10px" }}>
@@ -54,6 +70,7 @@ function RegistrationForm() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email"
           />
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
         </div>
 
         <div style={{ marginBottom: "10px" }}>
@@ -64,6 +81,7 @@ function RegistrationForm() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
           />
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         </div>
 
         <button type="submit">Register</button>
