@@ -7,6 +7,7 @@ import Post from "./components/Post";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import BlogPost from "./components/BlogPost";
 
 function Home() {
   return <h2>Home Page</h2>;
@@ -80,7 +81,7 @@ function App() {
           </Route>
 
           {/* Dynamic Route */}
-          <Route path="/posts/:id" element={<Post />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
         </Routes>
       </Router>
     </AuthProvider>
